@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="text-center alert alert-info">Lista de Produtos</h4>
+        {% if produto %}
+            
+                <tbody>
+                    {% for prod in produto %}
+
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#{{prod.slug}}" aria-expanded="true" aria-controls="{{prod.slug}}">
+                                <td>{{prod.nome_produto}}</td>
+                            </button>
+                          </h2>
+                          <div id="{{prod.slug}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <img src="/media/{{prod.imagem}}" style="width:70%">
+                                    </div>
+                                    <div class="col-9">
+                                        <h6><b>Nome:</b> {{prod.nome_produto}}</h6>
+                                        <h6><b>Preço:</b> {{prod.preco}}</h6>
+                                        <h6><b>Disponibilidade:</b> {{prod.qtd_produto}} unidade(s)</h6>
+                                        <p><b>Descrição:</b> {{prod.descricao}}</p>
+                                        <a href="comprar/{{prod.id}}" class="btn btn-warning btn-sm">comprar</a>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        {% else %}
+            <h4 class="text-center alert alert-warning">Sem Produtos</h4>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
